@@ -10,9 +10,8 @@ import logoImg from '../../assets/logo.svg';
 export default function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [whatsapp, setWhatsapp] = useState('');
-    const [city, setCity] = useState('');
-    const [uf, setUf] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const history = useHistory(); //permite fazer a navegação através de uma função JS
 
@@ -22,15 +21,14 @@ export default function Register() {
         const data = {
             name,
             email,
-            whatsapp,
-            city,
-            uf
+            password,
+            confirmPassword,
         };
 
        try {
-            const response =  await api.post('ongs', data);
+            //const response =  await api.post('ongs', data);
 
-            alert(`Seu ID de acesso: ${response.data.id}`);
+            alert("Conta cadastrada com sucesso.");
 
             history.push('/');
        } catch (err) {
@@ -43,49 +41,47 @@ export default function Register() {
         <div className="register-container">
             <div className="content">
                 <section>
-                    <img src={logoImg} alt="Be The Hero"/>
+                    <img src={logoImg} alt="Me Money"/>
 
                     <h1>Cadastro</h1>
-                    <p>Faça seu cadastro, entre na plaforma e ajude pessoas a encontrarem os casos da sua ONG.</p>
+                    <p>Faça seu cadastro e comece a gerenciar sua vida finaneira.</p>
 
                     <Link className="back-link" to="/">
-                        <FiArrowLeft size={16} color='#E02041'/>
+                        <FiArrowLeft size={16} color='#62CF35'/>
                         Já tenho cadastro
                     </Link>
                 </section>
                 
                 <form onSubmit={handleRegister}>
                     <input 
-                        placeholder="Nome da ONG" 
+                        placeholder="Nome Completo" 
                         value={name}
                         onChange={e => setName(e.target.value)}
+                        required
                     />
 
                     <input 
                         type="email" placeholder="E-mail" 
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        required
                     />
 
                     <input 
-                        placeholder="WhatsApp" 
-                        value={whatsapp}
-                        onChange={e => setWhatsapp(e.target.value)}
+                        type="password"
+                        placeholder="Senha" 
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
                     />
                     
-                    <div className="input-group">
-                        <input 
-                            placeholder="Cidade" 
-                            value={city}
-                            onChange={e => setCity(e.target.value)}
-                        />
-
-                        <input 
-                            placeholder="UF" style={{ width: 80 }} 
-                            value={uf}
-                            onChange={e => setUf(e.target.value)}
-                        /> 
-                    </div>
+                    <input 
+                        type="password"
+                        placeholder="Confirme sua senha" 
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                    />
 
                     <button className="button" type="submit">Cadastrar</button>
                 </form>

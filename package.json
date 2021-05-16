@@ -1,8 +1,11 @@
 {
-  "name": "semanaomnistack",
+  "name": "memoney",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/MichellyLima/be-the-hero.git",
+  "repository": "https://github.com/MichellyLima/me-money-frontend.git",
   "author": "Michelly Lima <michelly_slima@outlook.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
