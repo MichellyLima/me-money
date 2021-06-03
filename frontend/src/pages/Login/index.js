@@ -21,9 +21,9 @@ export default function Login() {
            //const response = await api.post('sessions', { id });
 
             localStorage.setItem('userEmail', email);
-            localStorage.setItem('userName', "Ângela Brito");
+            localStorage.setItem('userName', "Amanda");
 
-            history.push('/despesas');
+            history.push('/home');
         } catch (err) {
             alert('Falha no login, tente novamente');
         }

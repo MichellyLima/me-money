@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiPower, FiTrash2 } from 'react-icons/fi';
+import { FiLogOut , FiTrash2 } from 'react-icons/fi';
 
 import api from '../../services/api';
 
@@ -56,7 +56,7 @@ export default function Despesas() {
 
                 <Link className="button" to="/gastos/novo">Novo gasto</Link>
                 <button onClick={handleLogout} type="button">
-                    <FiPower size={18} color="#62CF35" />
+                    <FiLogOut  size={18} color="#62CF35" />
                 </button>
             </header>
 
