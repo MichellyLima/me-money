@@ -42,7 +42,7 @@ export default function Home(){
             </ul>
             
             <ul>
-                <Link className="link" to="/despesas">
+                <Link className="link" to="#">
                     <li>              
                         <FiCalendar size={30} color="#62CF35"/>                   
                         <strong>Planejamento</strong>               
