@@ -1,13 +1,13 @@
 <?php
     
     
-
+    header('Access-Control-Allow-Origin: *');
         
         //http://pgadmin.saude-go.net/browser/
-        $servername = "postgres-desenv.saude-go.net";
-        $database = "desenvolvimento";
-        $username = "gabrielmendonca";
-        $password = "rathalos2";
+        $servername = "localhost";
+        $database = "postgres";
+        $username = "postgres";
+        $password = "batata";
         // Create connection
         $db = pg_connect("host=$servername port=5432 dbname=$database user=$username password=$password" );
         //$conn = mysqli_connect($servername, $username, $password, $database);
@@ -16,17 +16,13 @@
             
            
             
-            $nome=($_REQUEST["nome"]);
-            $descricao=($_REQUEST["descricao"]);
+            $nome= ($_REQUEST["nome"]);
+            $descricao= ($_REQUEST["descricao"]);
                       
            
 
             $cont=0;
              
-            
-                 
-
-
 
             $sql = "INSERT INTO Categoria (nome,descricao) VALUES ('$nome','$descricao')";
 
