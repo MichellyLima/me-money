@@ -1,13 +1,11 @@
 <?php
-    
-    
-
         
+        header('Access-Control-Allow-Origin: *');
         //http://pgadmin.saude-go.net/browser/
-        $servername = "postgres-desenv.saude-go.net";
-        $database = "desenvolvimento";
-        $username = "gabrielmendonca";
-        $password = "rathalos2";
+        $servername = "localhost";
+        $database = "postgres";
+        $username = "postgres";
+        $password = "batata";
         // Create connection
         $db = pg_connect("host=$servername port=5432 dbname=$database user=$username password=$password" );
         //$conn = mysqli_connect($servername, $username, $password, $database);
@@ -16,36 +14,22 @@
             
            
             
-            $nome=($_REQUEST["nome"]);                                 
+            $nome= ($_REQUEST["nome"]);                                 
                       
-                 
-
-
-            $sql ="SELECT nome,descricao FROM Categoria WHERE nome='$nome'";
+            $sql ="SELECT nome,descricao FROM public.categoria WHERE nome='$nome'";
 
             $execute=pg_query($db,$sql);
            
            
            while ($row = pg_fetch_assoc($execute)) {
-            $nome=$nome['nome'];
+            $nome=$row['nome'];
             $descricao=$row['descricao'];
                         
-              
-
-            
-
             $vetor[] = array("nome" => $nome , "descricao" => $descricao);
           }  
 
-          
-
-
           echo json_encode($vetor,JSON_UNESCAPED_UNICODE);
             
-            
-            
-
-
          //$sql = "INSERT INTO cursosql.produto (codigo, nome, qtd , endereco) VALUES (15,'Ovo', 2, 'Rua S')";
          // $sql = "INSERT INTO cursosql.CLIENTE (codigo, nome, qtd , endereco) VALUES ($nome,$senha,$email,$cpf,$endereco)";
 
