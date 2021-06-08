@@ -1,32 +1,32 @@
-.home-container {
+.despesas-container {
     width: 100%;
     max-width: 1180px;
     padding: 0 30px;
     margin: 32px auto;
 }
 
-.home-container header {
+.despesas-container header {
     display: flex;
     align-items: center;
 }
 
-.home-container header span {
+.despesas-container header span {
     font-size: 20px;
     margin-left: 24px;
     margin-top: 1em;
 }
 
-.home-container header img{
+.despesas-container header img{
     height: 64px;
 }
 
-.home-container header a {
+.despesas-container header a {
     width: 260px;
     margin-left: auto;
     margin-top: 0;
 }
 
-.home-container header button {
+.despesas-container header button {
     height: 60px;
     width: 60px;
     border-radius: 4px;
@@ -36,49 +36,44 @@
     transition: border-color 0.2s;
 }
 
-.home-container header button:hover{
+.despesas-container header button:hover{
     border-color: #999;
 }
 
-.home-container h1 {
-    margin-top: 80px;
+.despesas-container h1 {
+    margin-top: 40px;
     margin-bottom: 24px;
 }
 
-.home-container ul {
+.despesas-container ul {
     display: grid;
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 5em;
     list-style: none;
 }
 
-.home-container ul li {
+.despesas-container ul li {
     background: #FFF;
-    padding: 24px 24px 20px;
+    text-align: center;
+    padding: 1em;
     border-radius: 8px;
     margin-bottom: 1.2em;
     display: grid;
-    grid-template-columns: 1fr 8fr;
     cursor: pointer;
     border: 1px solid #FFFFFF;
 }
 
-.home-container ul li:hover {
+.despesas-container ul li:hover {
     background: rgba(97, 205, 53, 0.2);
     border: 1px solid #81d75d;
     transition: 0.3s;
 }
 
-.home-container ul li strong {
-    padding-left: 0.8vw;
+.despesas-container ul li strong {
     font-size: 20px;
     margin-bottom: 16px;
     color: #41414d;
     margin-top: 0.6vh;
-}
-
-.home-container .components{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 }
 
 .link {

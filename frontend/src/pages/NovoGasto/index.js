@@ -6,11 +6,14 @@ import api from '../../services/api';
 
 import './styles.css';
 import logoImg from '../../assets/logo.svg';
+import { MdNetworkCell } from 'react-icons/md';
 
 export default function NovoGasto() {
-    const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('');
-    const [value, setValue] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [categoria, setCategoria] = useState('');
+    const [valor, setValor] = useState('');
+
+    const mes = new Date().getMonth();
 
     const history = useHistory();
 
@@ -20,17 +23,14 @@ export default function NovoGasto() {
         e.preventDefault();
 
         const data = {
-            title,
-            category,
-            value,
+            descricao,
+            categoria,
+            valor,
+            mes,
         };
 
         try{
-            await api.post('spents', data, {
-                //headers: {
-                   // Authorization: ongId,
-                //}
-            })
+            await api.post('./GastoCreate.php', data);
 
             history.push('/despesas');
         } catch (err) {
@@ -56,11 +56,11 @@ export default function NovoGasto() {
                 <form onSubmit={handleNovoGasto}>
                     <input 
                         placeholder="Título do gasto" 
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
+                        value={descricao}
+                        onChange={e => setDescricao(e.target.value)}
                     />
 
-                    <select placeholder="Categoria" name="category" value={category} onChange={e => setCategory(e.target.value)}>
+                    <select placeholder="Categoria" name="categoria" value={categoria} onChange={e => setCategoria(e.target.value)}>
                         <option value="alimentação">Alimentação</option>
                         <option value="educação">Educação</option>
                         <option value="serviços">Serviços</option>
@@ -71,8 +71,10 @@ export default function NovoGasto() {
 
                     <input 
                         placeholder="Valor em reais" 
-                        value={value}
-                        onChange={e => setValue(e.target.value)}
+                        type="number"
+                        data-type="currency"
+                        value={valor}
+                        onChange={e => setValor(e.target.value)}
                     />
 
                 

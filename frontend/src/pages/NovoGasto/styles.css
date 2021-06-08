@@ -43,6 +43,7 @@
 .new-spent-container .content form input,
 .new-spent-container.content form select {
     margin-top: 8px;
+    text-decoration: none;
 }
 
 form select{

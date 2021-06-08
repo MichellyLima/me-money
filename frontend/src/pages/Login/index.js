@@ -11,17 +11,17 @@ import moneyImg from '../../assets/wallet.png';
 
 export default function Login() {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [senha, setSenha] = useState('');
     const history = useHistory();
 
     async function handleLogin(e) {
         e.preventDefault();
 
         try{
-           //const response = await api.post('sessions', { id });
+           const response = await api.post('./Login.php', {email, senha});
 
             localStorage.setItem('userEmail', email);
-            localStorage.setItem('userName', "Amanda");
+            localStorage.setItem('userName', response.nome);
 
             history.push('/home');
         } catch (err) {
@@ -35,7 +35,6 @@ export default function Login() {
                 <img src={logoImg} alt="Me Money"/>
 
                 <form onSubmit ={handleLogin}>
-                    <h1>Faça seu Login</h1>
 
                     <input 
                         placeholder="Seu E-mail"
@@ -43,10 +42,10 @@ export default function Login() {
                         onChange={e => setEmail(e.target.value)}    
                     />
                     <input 
-                        type="password"
+                        type="senha"
                         placeholder="Senha"
-                        value = {password}
-                        onChange={e => setPassword(e.target.value)}    
+                        value = {senha}
+                        onChange={e => setSenha(e.target.value)}    
                     />
                     <button className="button" type="submit">Entrar</button>
 
@@ -57,7 +56,6 @@ export default function Login() {
                 </form>
             </section>
 
-            <img src={moneyImg} alt="Wallet Money"/>
         </div>
     )
 }

@@ -8,10 +8,10 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg';
 
 export default function Register() {
-    const [name, setName] = useState('');
+    const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [senha, setSenha] = useState(''); 
+    const [confirmacaoSenha, setConfirmacaoSenha] = useState('');
 
     const history = useHistory(); //permite fazer a navegação através de uma função JS
 
@@ -19,14 +19,19 @@ export default function Register() {
         e.preventDefault();
 
         const data = {
-            name,
+            nome,
             email,
-            password,
-            confirmPassword,
+            senha,
         };
 
        try {
-            //const response =  await api.post('ongs', data);
+
+            if(confirmacaoSenha !== senha){
+                alert("As senhas não coincidem.");
+                return;
+            }
+
+            const response =  await api.post('./Cadastro.php', data);
 
             alert("Conta cadastrada com sucesso.");
 
@@ -55,8 +60,8 @@ export default function Register() {
                 <form onSubmit={handleRegister}>
                     <input 
                         placeholder="Nome Completo" 
-                        value={name}
-                        onChange={e => setName(e.target.value)}
+                        value={nome}
+                        onChange={e => setNome(e.target.value)}
                         required
                     />
 
@@ -70,16 +75,16 @@ export default function Register() {
                     <input 
                         type="password"
                         placeholder="Senha" 
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        value={senha}
+                        onChange={e => setSenha(e.target.value)}
                         required
                     />
                     
                     <input 
                         type="password"
                         placeholder="Confirme sua senha" 
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        value={confirmacaoSenha}
+                        onChange={e => setConfirmacaoSenha(e.target.value)}
                         required
                     />
 
