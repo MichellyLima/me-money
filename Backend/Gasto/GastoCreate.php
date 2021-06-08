@@ -25,11 +25,11 @@
             $usuario = ($_REQUEST["usuario"]);
 
 
+
              
             
             $sql = "INSERT INTO Gasto(idgasto,categoria,valor,descricao) VALUES ('$id','$categoria','$valor','$descricao')";
 
-           
             
             pg_set_client_encoding($db, "utf8");
 

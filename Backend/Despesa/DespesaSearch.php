@@ -10,10 +10,9 @@
         //$conn = mysqli_connect($servername, $username, $password, $database);
         // Check connection
 
-            $mes=($_REQUEST["mes"]);
             $usuario = ($_REQUEST["usuario"]);
 
-            $sql ="SELECT mes, gasto.idgasto, categoria, valor, descricao FROM DespesaG inner join Gasto on DespesaG.idgasto = Gasto.idgasto and Despesag.mes = '$mes' and Despesag.usuario = '$usuario'";
+            $sql ="SELECT mes, gasto.idgasto, categoria, valor, descricao FROM DespesaG inner join Gasto on DespesaG.idgasto = Gasto.idgasto and Despesag.usuario = '$usuario'";
 
             pg_set_client_encoding($db, "utf8");
 
@@ -25,8 +24,9 @@
             $gasto=$row['idgasto'];
             $categoria=$row['categoria'];
             $valor=$row['valor'];
+            $descricao=$row['descricao'];
 
-            $vetor[] = array("mes" => $mes , "gasto" => $gasto , "categoria" => $categoria , "valor" => $valor);
+            $vetor[] = array("mes" => $mes , "gasto" => $gasto , "categoria" => $categoria , "valor" => $valor, "descricao" => $descricao);
           }  
 
           echo json_encode($vetor,JSON_UNESCAPED_UNICODE);

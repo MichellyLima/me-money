@@ -4,6 +4,7 @@
                 
             
                 header('Access-Control-Allow-Origin: *');
+                header("Access-Control-Allow-Headers: Content-Type");
                     //http://pgadmin.saude-go.net/browser/
                     $servername = "localhost";
                     $database = "postgres";

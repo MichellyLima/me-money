@@ -13,7 +13,7 @@ import logoImg from '../../assets/logo.svg'
 export default function Home(){
 
     const [categorias, setCategorias] = useState('');
-    const [despesas, setDespesas]
+    const [despesas, setDespesas] = useState('');
     const [options, setOptions] = useState({
         title: 'Despesas x Categoria',
         colors: ['#70CC31', '#4C8C22', '#2A4D12', '#76D934', '#61B32B']
@@ -28,7 +28,7 @@ export default function Home(){
 
     const history = useHistory();
 
-    const userName = localStorage.getItem('nome');
+    const userName = localStorage.getItem('userName');
 
     function handleLogout() {
         localStorage.clear();

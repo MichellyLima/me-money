@@ -8,31 +8,43 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg';
 import { MdNetworkCell } from 'react-icons/md';
 
+import $ from 'jquery'; 
+
 export default function NovoGasto() {
     const [descricao, setDescricao] = useState('');
     const [categoria, setCategoria] = useState('');
     const [valor, setValor] = useState('');
 
-    const mes = new Date().getMonth();
+    // let date;
+    const mes = new Date().getMonth() + 1;
+    // const year = new Date().getFullYear();
+    // date = '' + (mes+1) + '/' + year;
+    // console.log(mes, year, date);
+    
 
     const history = useHistory();
 
-    const ongId = localStorage.getItem('ongId');
+    const usuario = localStorage.getItem('userEmail');
 
     async function handleNovoGasto(e) {
         e.preventDefault();
 
-        const data = {
-            descricao,
-            categoria,
-            valor,
-            mes,
-        };
-
+        console.log('po', categoria);
         try{
-            await api.post('./GastoCreate.php', data);
+            //await api.post('./Gasto/GastoCreate.php', {data});
+            let response;
+            $.ajax({
+                type:'POST',		//Definimos o método HTTP usado
+                dataType: 'json',	//Definimos o tipo de retorno
+                url: 'http://localhost:8080/Gasto/GastoCreate.php',//Definindo o arquivo onde serão buscados os dados
+                data: {usuario: usuario, mes: mes, descricao: descricao, categoria: categoria, valor:  String(valor)},
+                success: function(dados){
+                    response = dados;
+                }
 
+            });
             history.push('/despesas');
+
         } catch (err) {
             alert('Erro ao cadastrar o gasto, tente novamente.');
         }
@@ -60,13 +72,14 @@ export default function NovoGasto() {
                         onChange={e => setDescricao(e.target.value)}
                     />
 
-                    <select placeholder="Categoria" name="categoria" value={categoria} onChange={e => setCategoria(e.target.value)}>
-                        <option value="alimentação">Alimentação</option>
-                        <option value="educação">Educação</option>
-                        <option value="serviços">Serviços</option>
-                        <option value="saúde">Saúde</option>
-                        <option value="cosméticos">Cosméticos</option>
-                        <option value="lazer">Lazer</option>
+                    <select placeholder="Categoria" name="categoria"  onChange={e => setCategoria(e.target.value)}>
+                        <option value="" disabled selected hidden>Selecione uma categoria</option>
+                        <option value="Alimentação">Alimentação</option>
+                        <option value="Educação">Educação</option>
+                        <option value="Serviços">Serviços</option>
+                        <option value="Saúde">Saúde</option>
+                        <option value="Mercado">Mercado</option>
+                        <option value="Lazer">Lazer</option>
                     </select>
 
                     <input 

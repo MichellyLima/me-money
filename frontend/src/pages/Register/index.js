@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import $ from 'jquery'; 
+
 
 import api from '../../services/api';
 import './styles.css';
@@ -19,9 +21,9 @@ export default function Register() {
         e.preventDefault();
 
         const data = {
-            nome,
-            email,
-            senha,
+            nome: nome,
+            email: email,
+            senha: senha,
         };
 
        try {
@@ -31,7 +33,16 @@ export default function Register() {
                 return;
             }
 
-            const response =  await api.post('./Cadastro.php', data);
+            let response;
+            $.ajax({
+                type:'POST',		//Definimos o método HTTP usado
+                dataType: 'json',	//Definimos o tipo de retorno
+                url: 'http://localhost:8080/Usuario/Cadastro.php',//Definindo o arquivo onde serão buscados os dados
+                data: {nome: nome, email: email, senha: senha },
+                success: function(dados){
+                    response = dados;
+                }
+            });
 
             alert("Conta cadastrada com sucesso.");
 

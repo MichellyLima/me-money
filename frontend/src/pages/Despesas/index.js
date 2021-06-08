@@ -9,24 +9,58 @@ import './styles.css';
 
 import logoImg from '../../assets/logo.svg'
 
+import $ from 'jquery'; 
+
 export default function Despesas(){
 
-    const [meses, setMeses] = useState([]);
-    const userName = localStorage.getItem('nome');
-    const userEmail = localStorage.getItem('email');
+    const [meses, setMeses] = useState([6]);
+    const [gastos, setGastos] = useState([]);
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
 
     const history = useHistory();
 
     const monthNames = ["", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
+    console.log('email', userEmail);
 
     useEffect(() => {
-        api.get('./DespesaSearch.php', ).then(response => {
-            setMeses(response.data.map(despesa => despesa.mes));
-        })
+        // api.get('./Despesa/DespesaSearch.php', {data: { usuario: userEmail, mes: '08/2020' }}).then(response => {
+        //     console.log(response);
+        //     //setMeses(response.data.map(despesa => despesa.mes));
+        // })
+
+        let response;
+        $.ajax({
+            type:'GET',		//Definimos o método HTTP usado
+            dataType: 'json',	//Definimos o tipo de retorno
+            url: 'http://localhost:8080/Despesa/DespesaSearch.php',//Definindo o arquivo onde serão buscados os dados
+            data: {usuario: userEmail},
+            success: function(dados){
+                console.log('batata', dados);
+                //listaMeses(dados);
+                
+            }
+
+        });
+
     }, [userEmail]);
 
+
+    function listaMeses(gastos)
+    {
+        console.log(gastos);
+        let antMes = -1;
+        for(let i = 0; i < gastos.length; i++)
+        {
+            let element = gastos[i];
+
+            //if(element.mes != antMes)
+                setMeses(meses.push(element.mes));
+            antMes = element.mes;
+        }
+    }
 
     function handleLogout() {
         localStorage.clear();
@@ -63,3 +97,4 @@ export default function Despesas(){
         </div>
     );
 }
+

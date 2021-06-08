@@ -9,6 +9,9 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg';
 import moneyImg from '../../assets/wallet.png';
 
+import $ from 'jquery'; 
+
+
 export default function Login() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -17,13 +20,26 @@ export default function Login() {
     async function handleLogin(e) {
         e.preventDefault();
 
+        
         try{
-           const response = await api.post('./Login.php', {email, senha});
+            let response;
+           $.ajax({
+                type:'GET',		//Definimos o método HTTP usado
+                dataType: 'json',	//Definimos o tipo de retorno
+                url: 'http://localhost:8080/Usuario/Login.php',//Definindo o arquivo onde serão buscados os dados
+                data: {email: email, senha: senha },
+                success: function(dados){
+                    response = dados;
+                    
+                    console.log(dados.nome);
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('userName', dados[0].nome);
+        
+                    history.push('/home');
+                }
 
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userName', response.nome);
+            });
 
-            history.push('/home');
         } catch (err) {
             alert('Falha no login, tente novamente');
         }
@@ -42,7 +58,7 @@ export default function Login() {
                         onChange={e => setEmail(e.target.value)}    
                     />
                     <input 
-                        type="senha"
+                        type="password"
                         placeholder="Senha"
                         value = {senha}
                         onChange={e => setSenha(e.target.value)}    
@@ -56,6 +72,7 @@ export default function Login() {
                 </form>
             </section>
 
+            <img src={moneyImg} alt="Me Money"/>
         </div>
     )
 }
