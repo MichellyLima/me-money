@@ -11,8 +11,11 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg'
 
 export default function Home(){
+
+    const [categorias, setCategorias] = useState('');
+    const [despesas, setDespesas]
     const [options, setOptions] = useState({
-        title: 'Gasto x Categoria',
+        title: 'Despesas x Categoria',
         colors: ['#70CC31', '#4C8C22', '#2A4D12', '#76D934', '#61B32B']
     });
 
